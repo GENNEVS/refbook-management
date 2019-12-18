@@ -8,72 +8,69 @@ namespace RefBookMS
 {
     class Menu
     {
-        const string MAIN_MENU = "" +
-            "(1) Create a new Reference Book\n" +
-            "(2) Display all records\n" +
-            "(3) Display records up to <Year>\n" +
-            "(4) Create a new record\n" +
-            "(5) Delete record\n" +
-            "(6) Update record\n" +
-            "(0) Exit the program";
+        public readonly string[] MAIN_MENU = {
+            "(1) Create a new Reference Book",
+            "(2) Display all records",
+            "(3) Display records up to <Year>",
+            "(4) Create a new record",
+            "(5) Delete record",
+            "(6) Update record",
+            "(0) Exit the program"
+        };
 
-        public int getTask()
+        public readonly string[] ABOUT = {
+            "Reference Book Management System",
+            "(the system is based on a binary file)",
+            "Created at 2019" 
+        };
+
+        public void DisplayInfo()
         {
-            Console.Write(MAIN_MENU);
+            Console.WriteLine();
+
+            foreach (string str in ABOUT)
+            {
+                PrintToConsole(
+                    getCenteredString(str, Console.WindowWidth, '\0'),
+                    ConsoleColor.Green);
+            }
+
+            System.Threading.Thread.Sleep(5000);
+        }
+
+        private void PrintToConsole(string str, ConsoleColor color)
+        {
+            Console.ForegroundColor = color;
+            Console.WriteLine($"{str}");
+            Console.ResetColor();
+        }
+
+        private string getCenteredString(string str, int windowWidht, char ch)
+        {
+            return str
+                    .PadLeft((windowWidht - str.Length) / 2 + str.Length, ch)
+                    .PadRight(windowWidht, ch);
+        }
+
+        public int getTask(string[] taskList)
+        {
+            Console.WriteLine();
+            PrintMenu(taskList);
+
             return Convert.ToInt32(Console.ReadLine());
         }
 
-        public void processTask(int taskID)
+        private void PrintMenu(string[] menu)
         {
-            switch (taskID)
+            Console.Clear();
+
+            foreach (string item in menu)
             {
-                case 0:
-                    break;
-                case 1:
-                    createReferenceBook();
-                    break;
-                case 2:
-                    displayReferenceBook();
-                    break;
-                case 3:
-                    displayReferenceBook(/*year*/);
-                    break;
-                case 4:
-                    createRecord();
-                    break;
-                case 5:
-                    deleteRecord();
-                    break;
-                case 6:
-                    updateRecord();
-                    break;
+                Console.WriteLine($"{new string(' ', 4)}{item}");
             }
 
+            Console.Write($"\n{new string('-', 25)}\nPrint command number: ");
         }
 
-        private void updateRecord()
-        {
-            throw new NotImplementedException();
-        }
-
-        private void deleteRecord()
-        {
-            throw new NotImplementedException();
-        }
-
-        private void createRecord()
-        {
-            throw new NotImplementedException();
-        }
-
-        private void displayReferenceBook()
-        {
-            throw new NotImplementedException();
-        }
-
-        private void createReferenceBook()
-        {
-            throw new NotImplementedException();
-        }
     }
 }
