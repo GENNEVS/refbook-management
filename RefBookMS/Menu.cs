@@ -63,13 +63,15 @@ namespace RefBookMS
         private void PrintMenu(string[] menu)
         {
             Console.Clear();
+            Console.WriteLine();
 
             foreach (string item in menu)
             {
                 Console.WriteLine($"{new string(' ', 4)}{item}");
             }
 
-            Console.Write($"\n{new string('-', 25)}\nPrint command number: ");
+            Console.WriteLine($"{new string(' ', 4)}{new string('-', 25)}");
+            Console.Write($"{new string(' ', 4)}Print command number: ");
         }
 
     }
